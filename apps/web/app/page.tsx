@@ -1,15 +1,12 @@
 import type { Book } from "@repo/database";
 
-const API_URL = process.env.API_URL
-  ? `${process.env.API_URL}`
-  : "http://localhost:3000";
+export const dynamic = "force-dynamic";
+
+const API_URL = process.env.API_URL ?? "http://localhost:8080";
 
 export default async function Page() {
   const res = await fetch(`${API_URL}/`);
-
-  if (!res.ok) {
-    return <p className="text-red-600">Internal server error</p>;
-  }
+  if (!res.ok) return <ErrorState />;
 
   const books: Array<Book> = await res.json();
 
@@ -31,3 +28,11 @@ export default async function Page() {
     </div>
   );
 }
+
+const ErrorState = () => {
+  return (
+    <p className="text-red-500">
+      An error occurred while fetching the data. Please try again later.
+    </p>
+  );
+};

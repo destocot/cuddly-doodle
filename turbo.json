@@ -4,7 +4,6 @@
   "tasks": {
     "build": {
       "dependsOn": ["^db:generate", "^build"],
-      "env": ["API_URL"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
