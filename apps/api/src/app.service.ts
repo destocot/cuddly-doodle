@@ -4,7 +4,11 @@ import { type Book, prisma } from '@repo/database';
 @Injectable()
 export class AppService {
   async findAll(): Promise<Array<Book>> {
-    const books = await prisma.book.findMany();
+    const books = await prisma.book.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
     return books;
   }
 
