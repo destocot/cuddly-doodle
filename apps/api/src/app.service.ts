@@ -7,4 +7,14 @@ export class AppService {
     const books = await prisma.book.findMany();
     return books;
   }
+
+  async create(book: Book): Promise<Book> {
+    const newBook = await prisma.book.create({
+      data: {
+        title: book.title,
+        author: book.author,
+      },
+    });
+    return newBook;
+  }
 }

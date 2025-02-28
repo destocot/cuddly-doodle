@@ -11,7 +11,7 @@ datasource db {
 model Book {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
 
   title  String
   author String

@@ -1,11 +1,13 @@
 import type { Book } from "@repo/database";
+import { CreateBookForm } from "../components/create-book-form";
+import { API_URL } from "../lib/constants";
 
 export const dynamic = "force-dynamic";
 
-const API_URL = process.env.API_URL ?? "http://localhost:8080";
-
 export default async function Page() {
-  const res = await fetch(`${API_URL}/`);
+  const res = await fetch(`${API_URL}/api/books`, {
+    next: { tags: ["books"] },
+  });
   if (!res.ok) return <ErrorState />;
 
   const books: Array<Book> = await res.json();
@@ -17,10 +19,22 @@ export default async function Page() {
 
         <hr />
 
+        <CreateBookForm />
+
+        <hr />
+
         <ul className="space-y-2">
           {books.map((book) => (
             <li key={book.id}>
-              {book.title} by <span className="font-medium">{book.author}</span>
+              <div className="flex flex-col">
+                <p>
+                  {book.title} by{" "}
+                  <span className="font-medium">{book.author}</span>
+                </p>
+                <span className="text-xs text-gray-500">
+                  added on {new Date(book.createdAt).toLocaleDateString()}
+                </span>
+              </div>
             </li>
           ))}
         </ul>

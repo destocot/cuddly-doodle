@@ -2056,7 +2056,7 @@ export namespace Prisma {
 
   export type BookCreateInput = {
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
     title: string
     author: string
   }
@@ -2064,7 +2064,7 @@ export namespace Prisma {
   export type BookUncheckedCreateInput = {
     id?: number
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
     title: string
     author: string
   }
@@ -2087,7 +2087,7 @@ export namespace Prisma {
   export type BookCreateManyInput = {
     id?: number
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
     title: string
     author: string
   }
